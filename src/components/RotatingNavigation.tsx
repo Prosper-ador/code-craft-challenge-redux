@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { Menu, X, Home, User, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
-import NavigationContent from './NavigationContent';
 
 /**
  * RotatingNavigation Component
@@ -18,7 +17,12 @@ import NavigationContent from './NavigationContent';
  * The navigation rotates the entire container to reveal a side menu,
  * creating an engaging user experience while maintaining usability.
  */
-const RotatingNavigation: React.FC = () => {
+
+interface RotatingNavigationProps {
+  children: React.ReactNode;
+}
+
+const RotatingNavigation: React.FC<RotatingNavigationProps> = ({ children }) => {
   // State to track whether the navigation is open
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
@@ -141,8 +145,8 @@ const RotatingNavigation: React.FC = () => {
           )}
         </Button>
 
-        {/* Main Content */}
-        <NavigationContent />
+        {/* Page Content */}
+        {children}
 
         {/* Overlay - Appears when navigation is open to close on click */}
         {isOpen && (
