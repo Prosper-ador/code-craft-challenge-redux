@@ -1,0 +1,32 @@
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-init-script
+  namespace: rotating-nav-app
+data:
+  init.sql: |
+    -- Initialize database schema for rotating navigation app
+    CREATE TABLE IF NOT EXISTS users (
+        id SERIAL PRIMARY KEY,
+        username VARCHAR(50) UNIQUE NOT NULL,
+        email VARCHAR(100) UNIQUE NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+
+    CREATE TABLE IF NOT EXISTS navigation_logs (
+        id SERIAL PRIMARY KEY,
+        user_id INTEGER REFERENCES users(id),
+        page_visited VARCHAR(100) NOT NULL,
+        visited_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+
+    -- Insert sample data
+    INSERT INTO users (username, email) VALUES 
+        ('demo_user', 'demo@example.com'),
+        ('test_user', 'test@example.com');
+
+    INSERT INTO navigation_logs (user_id, page_visited) VALUES 
+        (1, '/home'),
+        (1, '/about'),
+        (2, '/contact');

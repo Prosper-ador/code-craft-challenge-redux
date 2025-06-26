@@ -1,0 +1,7 @@
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: rotating-nav-app
+  labels:
+    name: rotating-nav-app

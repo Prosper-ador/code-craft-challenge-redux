@@ -1,0 +1,10 @@
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: rotating-nav-app
+data:
+  DATABASE_URL: "postgresql://app_user:secure_password@postgres-service:5432/rotating_nav_db"
+  REDIS_URL: "redis://redis-service:6379"
+  NODE_ENV: "production"

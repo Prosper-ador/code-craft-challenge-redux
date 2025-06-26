@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Menu, X, Home, User, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
 import NavigationContent from './NavigationContent';
 
 /**
@@ -12,6 +13,7 @@ import NavigationContent from './NavigationContent';
  * - Accessible keyboard navigation
  * - Responsive design
  * - Clean, modular code structure
+ * - React Router navigation
  * 
  * The navigation rotates the entire container to reveal a side menu,
  * creating an engaging user experience while maintaining usability.
@@ -19,6 +21,7 @@ import NavigationContent from './NavigationContent';
 const RotatingNavigation: React.FC = () => {
   // State to track whether the navigation is open
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   /**
    * Toggles the navigation state between open and closed
@@ -30,31 +33,34 @@ const RotatingNavigation: React.FC = () => {
 
   /**
    * Navigation items configuration
-   * Each item includes an icon, label, and action
+   * Each item includes an icon, label, and navigation path
    */
   const navigationItems = [
     {
       icon: Home,
       label: 'Home',
+      path: '/home',
       action: () => {
         setIsOpen(false);
-        console.log('Navigate to Home');
+        navigate('/home');
       }
     },
     {
       icon: User,
       label: 'About',
+      path: '/about',
       action: () => {
         setIsOpen(false);
-        console.log('Navigate to About');
+        navigate('/about');
       }
     },
     {
       icon: Mail,
       label: 'Contact',
+      path: '/contact',
       action: () => {
         setIsOpen(false);
-        console.log('Navigate to Contact');
+        navigate('/contact');
       }
     }
   ];
